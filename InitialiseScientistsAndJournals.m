@@ -55,7 +55,7 @@ J = journalsPopulation;
 
 in0 = zeros(1,J);
 % Journals are defined by eight values: 1. Their id number, 
-%                                       2. Their impact factor, 
+%                                       2. Their reputation, 
 %                                       3. Their low threshold, 
 %                                       4. Their high threshold,
 %                                       5. The amount of papers they have accepted, 

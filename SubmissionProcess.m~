@@ -32,28 +32,22 @@ scientists(author,2) = scientists(author,2) - totalResourcesInvested';
 scientistTargeting = 0.45;
 [ qualityOfPapers(weekRange,5) ] = WhereToSubmit( journals, qualityOfPapers(weekRange,1), scientistTargeting );
 
+% Variable that helps identify papers, journals and scientists. It is
+% useful for measuring purposes only and does not play role in the
+% procedures of the model. 
 currentLength = length(journalsToUpdate) + 1;
 futureLength = currentLength + length(weekRange) - 1;
 
-% Variable that helps identify papers, journals and scientists. It is
-% useful for measuring purposes only and does not play role in the
-% procedures of the model. Its values are: 1. Id of the journal to be updated,
-%                                          2. In which time step to update, 
-%                                          3. Submission attempts until
-%                                          this point,
-%                                          4. Decision taken for the paper and
-%                                          5. The id of the author
-
-journalsToUpdate(currentLength:futureLength,1) = qualityOfPapers(weekRange,5); 
-journalsToUpdate(currentLength:futureLength,2) = NaN;                           
-journalsToUpdate(currentLength:futureLength,3) = 0;                             
-journalsToUpdate(currentLength:futureLength,4) = NaN;                           
-journalsToUpdate(currentLength:futureLength,5) = author;                        
+%
+journalsToUpdate(currentLength:futureLength,1) = qualityOfPapers(weekRange,5);  % Journal to update
+journalsToUpdate(currentLength:futureLength,2) = NaN;                           % Time step to update
+journalsToUpdate(currentLength:futureLength,3) = 0;                             % Submission attempts until this point
+journalsToUpdate(currentLength:futureLength,4) = NaN;                           % Accepted or rejected
+journalsToUpdate(currentLength:futureLength,5) = author;                        % Authors
 
 % Store the initial amount of resources used for the paper and also its author
 resourcesCounter(weekRange,1) = totalResourcesInvested;
 resourcesCounter(weekRange,5) = author;
 
-% This will help determining whether a paper will be resubmitted or not.
-% ALl papers are resubmitted at least once.
+% This will check whether there will be resubmissions or not
 resubmissionProbability = ones(length(weekRange),1);

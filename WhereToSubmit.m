@@ -1,10 +1,14 @@
 function [ journalToSubmit ] = WhereToSubmit( journals, qualityOfPaper, percentage )
-% Selects a journal, inside an appropriate range of impact factors, in
-% order for the author to submit the paper
+% Selects a journal, inside an appropriate range of reputations, in order 
+% for the author to submit the paper.
+
 global journalsPopulation
 
 journalToSubmit = zeros(length(qualityOfPaper),1);
 
+% Definition of the length of the range of the journals that are candidates
+% for the submition of the paper. We also add small amount of noise to the
+% min and max values of that range.
 submissionRangeLength = 2.*abs(random('normal',qualityOfPaper/5,qualityOfPaper/20));
 noiceInThePercentage = random('normal',percentage,0.01);
 
