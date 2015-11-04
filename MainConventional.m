@@ -22,24 +22,26 @@ while (iTime <= time)
     %% Finalising calculations
     numberOfPapers = numberOfPapers + length(weekRange);
 
-    % Resources related again
+    % Resources counter variables.
     [ resourcesCounter ] = ResourcesCounter( resourcesCounter, totalResourcesInvested, qualityOfPapers, weekRange);
 
     % Update of the per-time step and of the cummulative scientific 
-    % information that is released to the system   
+    % information that is released to the system.
     [ scientists, qualityOfPapers, totalScientificInformation(iTime), publishedQuality, resourcesCounter ] = ScientificInformation( scientists, journals, ...  
         qualityOfPapers, numberOfPapers, publishedQuality, resourcesCounter );
     
-    % Update of the scientific's community level due to the new publications
+    % Update of the scientific's community level due to the new
+    % publications.
     [ scientists, cummulativeScientificInformation ] = UpdateTheScientificCommunity( scientists, totalScientificInformation, publishedQuality, iTime );
 
-    % Update of the time that papers need in order to be published
+    % Update of the time that papers need in order to be published.
     qualityOfPapers(1:numberOfPapers - 1,6) = qualityOfPapers(1:numberOfPapers - 1,6) - 1;
     
     % Update acceptance rates
     [ scientists, journals, journalsToUpdate, reviewingTime ] = UpdateJournals( scientists, journals, journalsToUpdate, reviewingTime );
 
-    % Calculation of yearly time spent in peer review and of the yearly amount of published papers
+    % Calculation of yearly time spent in peer review and of the yearly
+    % amount of published papers.
     if (mod(iTime,weeksInAYear) == 0)
         yearIndex = iTime/weeksInAYear;
         yearlyTimeSpentForReviewing(yearIndex) = sum(reviewingTime);
@@ -48,7 +50,7 @@ while (iTime <= time)
         yearlyPublishedPapers(yearIndex) = length(publishedPapers);
     end
     
-    % Now that the thresholds have been set the system is reinitialised in order to work in a calibrated way
+    % After the burn-in period of one year, the system is reinitialised.
     Reinitialise
     
     % Update the time

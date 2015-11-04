@@ -95,7 +95,7 @@ totalTimeSpentForReviewing = sum(reviewingTime);
 timeSpentByTheEditors = sum(random('uniform',1,3,1,(length(publishedPapers(:,1)) + sum(publishedPapers(:,4)))));
 
 % Main results
-resubmissions = hist(qualityOfPapers(1:numberOfPapers-1,4),20);
+resubmissions = hist(publishedPapers(:,4),20);
 resubmissions = resubmissions/numberOfPapers;
 resubmissions(resubmissions == 0) = [];
 resubmissionsFinal(:,1) = round(100*resubmissionsReal',1);

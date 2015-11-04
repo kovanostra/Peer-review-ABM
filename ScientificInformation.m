@@ -3,7 +3,9 @@ function [ scientists, qualityOfPapers, totalScientificInformation, publishedQua
 
 % Finds the information relleased to the scientific community by the paper
 % and the journal that it was published to. A paper contributes to the
-% scientific information only at its exact time of publication.
+% scientific information only at its exact time of publication. Also here
+% we define the bonuses of the authors and subtract from the scientific
+% level when necessary.
 
 papersToPublish = find(qualityOfPapers(1:numberOfPapers - 1,6) == 0);
 totalScientificInformation = 0;
