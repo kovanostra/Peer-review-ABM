@@ -1,13 +1,11 @@
+%% Definition of parameters and constants   
+
 global authorBias               resourcesParameter              sclContributionToQuality ...
        sclParameter             thirdReviewerProbability        scientistsPopulation ...
        epsilon                  resourcesContributionToQuality  timeSpent ...
        journalsPopulation       competitiveProbability          noEditorialScreening ...
-       
-       
-       
- %% Definition of parameters and constants   
 
-% Initialisation of the "scientists" and "journals" variables
+% Initialisation of the scientists and the journals
 [ scientists, journals ] = InitialiseScientistsAndJournals( );   
 
 % Acceptance rates
@@ -40,8 +38,7 @@ reviewingTime = zeros(scientistsPopulation,1);
 
 % Quality, Improved quality, percentage of improvement, 
 % resubmissions, journal, time to publish, author
-qualityOfPapers = zeros(20*scientistsPopulation,7);
-weeklyResubmissionFlow = cell(time);
+qualityOfPapers = zeros(10*scientistsPopulation,7);
 
 % Quality that was published, scientific information that 
 % was published, was it a correct publication or not
@@ -53,7 +50,7 @@ shouldBePublished = [ 0 0 0 ];
                          
 % Initial resources, final resources, relative difference,
 % ratio, author
-resourcesCounter = zeros(20*scientistsPopulation,5);
+resourcesCounter = zeros(10*scientistsPopulation,5);
 
 % Journals to update measure variable
 journalsToUpdate = [];
@@ -66,7 +63,7 @@ cummulativeScientificInformation = zeros(time,1);
 competitiveProbability = linspace(0.10,0.66,journalsPopulation);
 
 % Journals that do not screen editorially
-noEditorialScreening = randperm(journalsPopulation - 10,5);
+noEditorialScreening = randperm(round(0.095*journalsPopulation),5);
 
 %% Define the time spent by the reviewers
 lengthHelp = 10000;
