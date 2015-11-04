@@ -1,4 +1,7 @@
 function [ authors, papers ] = Decompose( scientists, author, qualityOfPapers, weekRange )
+% This function just decomposes the various values of the scientists and
+% the papers and gives them an individual name. It is used for simplifying
+% and making more readable the code only.
 
 %% Decompose to weekly submitting scientists
 authors.name = scientists(author,1);

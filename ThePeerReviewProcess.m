@@ -3,8 +3,7 @@ firstUpdate = 1;
 
 while (sum(resubmissionProbability) ~= 0.0) 
 
-    % Acceptance or rejection of the paper based on the previous
-    % evaluation
+    % Acceptance or rejection of the paper based on the previous evaluation
     AcceptanceOrRejection
 
     if ( firstUpdate == 1 )
@@ -24,6 +23,6 @@ end
 
 % Calculate the time that the paper will be published and whether this
 % is a right decision or not
-[ ~, papers.publish, journalsToUpdate ] = WhenToPublish( decision, papers, journalsToUpdate );
+[ papers.publish, journalsToUpdate ] = WhenToPublish( decision, papers, journalsToUpdate );
 
 [ scientists, qualityOfPapers ] = Recompose( scientists, authors, author, qualityOfPapers, papers, weekRange );

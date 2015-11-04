@@ -1,4 +1,4 @@
-function [ historyOfPapers, publish, journalsToUpdate ] = WhenToPublish( decision, papers, journalsToUpdate )
+function [ publish, journalsToUpdate ] = WhenToPublish( decision, papers, journalsToUpdate )
 % This function sets a "time to publish" value to the accepted papers and a
 % NaN value to the rejected papers that are not going to be resubmitted
 % again. When the timer becomes equal to zero, the paper can be published

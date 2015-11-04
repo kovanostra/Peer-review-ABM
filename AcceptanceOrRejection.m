@@ -1,7 +1,8 @@
-% Here the journal based on the evaluation that the referees submit defines
-% whether the paper gets accepted or not. There is also an 80% probability
-% that the paper gets rejected by the editor if it does not fullfil the
-% journal's requirements.
+% Here the journal based on the evaluation that the referees submit decides
+% whether the paper gets accepted or not. There is also a probability
+% that the paper gets rejected by the editor if its Q score isn't higher than 
+% the journal's low threshold.
+
 global noEditorialScreening
 
 
@@ -9,7 +10,8 @@ global noEditorialScreening
 journal = papers.journal;
 submissions = length(journal);
 
-% Fix paper's quality if there has been an improvement
+% If the Q score of the paper was changed after peer review in the past,
+% we select the last value with the help of this function.
 [ finalQuality ] = Index( papers, resubmissionProbability );
 
 decision.reviewer = zeros(length(finalQuality),1);

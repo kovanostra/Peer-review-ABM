@@ -1,4 +1,8 @@
 function [ scientists, qualityOfPapers ] = Recompose( scientists, authors, author, qualityOfPapers, papers, weekRange )
+% This function just recomposes the various values of the scientists and
+% the papers and puts them under the previous variable. It is used for 
+% simplifying and making more readable the code only.
+
 scientists(author,1) = authors.name;
 scientists(author,2) = authors.resources;
 scientists(author,3) = authors.publications;
@@ -12,6 +16,5 @@ qualityOfPapers(weekRange,5) = papers.journal;
 qualityOfPapers(weekRange,6) = papers.publish;
 qualityOfPapers(weekRange,7) = papers.author;
 
-% timeToPublish = papers.publish;
 end
 

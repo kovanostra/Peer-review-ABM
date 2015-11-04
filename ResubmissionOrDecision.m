@@ -1,7 +1,8 @@
 % This function checks whether the paper is accepted or rejected. If it is
 % rejected then there is a probability to be resubmitted to the same or to
 % another journal. This probability gets lower and lower as the number of
-% resubmission attempts increases.
+% resubmission attempts increases. At the end, papers that fail to be
+% resubmitted they get abandoned and never published.
 
 r = rand(length(resubmissionProbability),1);
 
@@ -27,7 +28,9 @@ newJournals = find(isnan(journalsToUpdate(:,2)) == 1);
 for iResubmission = 1:length(resubmissionProbability)
 
     if (resubmission(iResubmission) == 1)
-
+        % This procedure finds the papers that are eligible for
+        % resubmission, updates their quality if they were peer reviewed
+        % before being rejected and submits them to a new journal.
         resubmissions(iResubmission) = resubmissions(iResubmission) + 1;
         [ resources(iResubmission), percentage(iResubmission), improvedQuality(iResubmission), journal(iResubmission), ... 
             totalResourcesInvested(iResubmission) ] = UpdateForResubmission( journals, resources(iResubmission), ...
@@ -43,20 +46,22 @@ for iResubmission = 1:length(resubmissionProbability)
         journalsToUpdate(newLength,:) = [ journal(iResubmission) NaN resubmissions(iResubmission) NaN name(iResubmission) ];
 
     elseif (giveUp(iResubmission) == 1)
-
+        % This  procedure finds the papers that will be abandoned and never 
+        % get published.
         notUpdated1 = find(journalsToUpdate(newJournals(1):end,3) >= 1);
         rejectedAuthor = find(journalsToUpdate(notUpdated1:end,5) == name(iResubmission));
         journalsToUpdate(notUpdated1(1) + rejectedAuthor(end) - 1,4) = decision.joint(iResubmission); 
 
-        % Those papers that will not be resubmitted
+        % Papers that will not be resubmitted.
         resubmissionProbability(iResubmission) = 0;
     elseif (accepted(iResubmission) == 1)
-
+        % THis procedure finds the papers that were accepted and thus not
+        % going to be resubmitted.
         notUpdated2 = find(journalsToUpdate(newJournals(1):end,3) >= 1);
         acceptedAuthor = find(journalsToUpdate(notUpdated2:end,5) == name(iResubmission));
         journalsToUpdate(notUpdated2(1) + acceptedAuthor(end) - 1,4) = decision.joint(iResubmission);     
         
-        % Those papers that will not be resubmitted
+        % Papers that will not be resubmitted.
         resubmissionProbability(iResubmission) = 0;
     end
 end
