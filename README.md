@@ -1,6 +1,6 @@
 # Peer-review-ABM
 
-This repository contains the code contains the code used in the paper:
+This repository contains the code used in the paper:
 
 
 Complex systems approach to scientific publication and peer-review system: 
